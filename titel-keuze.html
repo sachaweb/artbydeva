@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Artbydeva — Titelkeuze</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: #1a1a2e; color: #e0d8cc; padding: 32px; line-height: 1.6; }
+    h1 { font-size: 28px; color: #e6c25e; margin-bottom: 8px; }
+    .intro { color: #9d93a6; margin-bottom: 40px; font-size: 15px; }
+    .painting { display: grid; grid-template-columns: 300px 1fr; gap: 32px; margin-bottom: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,0.08); align-items: start; }
+    .painting img { width: 100%; height: auto; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1); }
+    .painting-info { padding-top: 8px; }
+    .painting-number { font-size: 12px; color: #e6c25e; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 8px; }
+    .painting-current { font-size: 13px; color: #7c7388; margin-bottom: 16px; }
+    .painting-current strong { color: #bcb2c0; }
+    .options { display: flex; flex-direction: column; gap: 10px; }
+    .option { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; cursor: pointer; transition: all 0.2s; }
+    .option:hover { background: rgba(216,169,60,0.1); border-color: rgba(216,169,60,0.3); }
+    .option.selected { background: rgba(216,169,60,0.15); border-color: #e6c25e; }
+    .option input[type="radio"] { accent-color: #e6c25e; width: 16px; height: 16px; cursor: pointer; }
+    .option label { cursor: pointer; font-size: 18px; font-style: italic; color: #f1eadb; flex: 1; }
+    .option .tag { font-size: 11px; color: #e6c25e; background: rgba(216,169,60,0.15); padding: 3px 10px; border-radius: 999px; letter-spacing: 0.05em; }
+    .option .hint { font-size: 12px; font-style: normal; color: #7c7388; margin-top: 2px; }
+    .option label { display: flex; flex-direction: column; }
+    .option-custom { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; transition: all 0.2s; }
+    .option-custom:focus-within { background: rgba(216,169,60,0.1); border-color: rgba(216,169,60,0.3); }
+    .option-custom.selected { background: rgba(216,169,60,0.15); border-color: #e6c25e; }
+    .option-custom input[type="radio"] { accent-color: #e6c25e; width: 16px; height: 16px; cursor: pointer; }
+    .option-custom input[type="text"] { flex: 1; background: transparent; border: none; border-bottom: 1px solid rgba(255,255,255,0.2); color: #f1eadb; font-size: 18px; font-style: italic; font-family: inherit; padding: 4px 0; outline: none; }
+    .option-custom input[type="text"]::placeholder { color: #7c7388; font-style: italic; }
+    .option-custom input[type="text"]:focus { border-bottom-color: #e6c25e; }
+    .chosen { color: #7c7388; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; }
+    .summary { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(26,26,46,0.95); backdrop-filter: blur(12px); padding: 16px 32px; border-top: 1px solid rgba(216,169,60,0.3); display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .summary-text { font-size: 14px; color: #bcb2c0; }
+    .summary-text strong { color: #e6c25e; }
+    .btn-copy { padding: 10px 24px; background: #e6c25e; color: #1a1a2e; border: none; border-radius: 999px; font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+    .btn-copy:hover { background: #f0d478; }
+    .spacer { height: 80px; }
+    @media (max-width: 700px) {
+      .painting { grid-template-columns: 1fr; }
+      .painting img { max-width: 280px; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Titelkeuze — Deva Saal</h1>
+  <p class="intro">Klik op een titel per schilderij. Onderaan kun je je keuzes kopiëren.<br>Bataclan is al definitief en staat niet in de lijst.</p>
+
+  <div id="paintings"></div>
+  <div class="spacer"></div>
+
+  <div class="summary">
+    <span class="summary-text" id="summary-text"><strong>0</strong> van 19 gekozen</span>
+    <button class="btn-copy" onclick="copyChoices()">Kopieer keuzes</button>
+  </div>
+
+  <script>
+    const data = [
+      { nr: '01', file: 'paintings-new/IMG_0279.webp', current: 'Drie Godinnen', options: [
+        { name: 'Drie Godinnen' },
+        { name: 'Drie Gratiën', hint: 'De drie Gratiën uit de Griekse mythologie — godinnen van schoonheid, charme en vreugde' },
+        { name: 'De Drie Zusters' },
+      ]},
+      { nr: '02', file: 'paintings-new/IMG_0255.webp', current: 'Gouden Madonna', options: [
+        { name: 'Gouden Madonna', hint: 'Verwijst naar de gouden aureool en het bladgoud' },
+        { name: 'Madonna in Bloei', hint: 'De bloesems in haar haar, het roze rondom — bloeiend, levend' },
+        { name: 'Madonna met Bloesem', hint: 'Beschrijft letterlijk de bloemen in het haar' },
+        { name: 'Madonna van het Licht', hint: 'De gouden gloed als innerlijk licht' },
+      ]},
+      { nr: '03', file: 'paintings-new/IMG_0265.webp', current: 'Gesluierde in Goud', options: [
+        { name: 'Zelfportret', hint: 'Als je wilt dat bezoekers weten dat dit Deva zelf is' },
+        { name: 'Gouden Blik', hint: 'De directe, doordringende ogen zijn het sterkste element' },
+        { name: 'Portret met Bindi', hint: 'Beschrijft het portret met het opvallende bindi-juweel' },
+      ]},
+      { nr: '04', file: 'paintings-new/IMG_0277.webp', current: 'Moeder & Kind', options: [
+        { name: 'Moeder & Kind' },
+        { name: 'Geborgenheid', hint: 'Het gevoel van het schilderij — veiligheid, warmte' },
+        { name: 'Stilte van de Moeder', hint: 'Het stille, beschermende gebaar' },
+      ]},
+      { nr: '05', file: 'paintings-new/IMG_0286.webp', current: 'Vrouw met Anthurium', options: [
+        { name: 'Vrouw met Anthurium' },
+        { name: 'Anthurium', hint: 'Kort en krachtig — de bloem als centraal symbool' },
+        { name: 'De Vlam die Bloeit', hint: 'De anthurium lijkt op een vlam; ook symbool voor passie' },
+      ]},
+      { nr: '06', file: 'paintings-new/IMG_0253.webp', current: 'Gesluierde in Oranje', options: [
+        { name: 'Gesluierde in Oranje' },
+        { name: 'Oranje Devotie', hint: 'Het oranje als kleur van devotie in hindoe-traditie' },
+        { name: 'Ogen van Vuur', hint: 'De opvallende groene ogen tegen het warme oranje' },
+      ]},
+      { nr: '07', file: 'paintings-new/IMG_0252.webp', current: 'Rode Sluier', options: [
+        { name: 'Rode Sluier' },
+        { name: 'De Rode Madonna', hint: 'Het icoon-achtige, frontale gezicht doet denken aan een madonna' },
+        { name: 'Achter de Sluier', hint: 'De mysterie van wat verscholen ligt achter het rode textiel' },
+      ]},
+      { nr: '09', file: 'paintings-new/IMG_0263.webp', current: 'Oranje Hoofddoek', options: [
+        { name: 'Oranje Hoofddoek' },
+        { name: 'Stille Kracht', hint: 'De rustige waardigheid die het portret uitstraalt' },
+        { name: 'Sahel', hint: 'De Sahel-regio in Afrika — de kleding en hoofddoek zijn typisch voor West-Afrikaanse vrouwen in dit gebied' },
+        { name: 'Waardigheid' },
+      ]},
+      { nr: '10', file: 'paintings-new/IMG_0275.webp', current: 'Groene Sluier', options: [
+        { name: 'Groene Sluier' },
+        { name: 'Jade', hint: 'De groentinten doen denken aan jade — de edelsteen die staat voor sereniteit en bescherming' },
+        { name: 'Droomster in Groen', hint: 'De gesloten ogen suggereren een droomtoestand' },
+      ]},
+      { nr: '11', file: 'paintings-new/IMG_0269.webp', current: 'Drie Gezichten', options: [
+        { name: 'Drie Gezichten' },
+        { name: 'Drie Profielen in Groen' },
+        { name: 'De Drie Gedaanten', hint: 'Verwijst naar de drievoudige godin (maagd, moeder, wijze vrouw) — drie fasen van het vrouwenleven' },
+      ]},
+      { nr: '12', file: 'paintings-new/IMG_0249.webp', current: 'Twee', options: [
+        { name: 'Twee' },
+        { name: 'De Kus', hint: 'De gezichten raken bijna — een kus die net niet plaatsvindt' },
+        { name: 'Donker & Licht', hint: 'Het contrast tussen de twee vrouwen: donkere en lichte huid' },
+      ]},
+      { nr: '13', file: 'paintings-new/IMG_0297.webp', current: 'Profiel in Oker', options: [
+        { name: 'Profiel in Oker' },
+        { name: 'Turquoise Profiel', hint: 'De turquoise achtergrondkleur domineert eigenlijk meer dan het oker' },
+        { name: 'Tussen Twee Werelden', hint: 'De dromerige, wazige stijl suggereert een toestand tussen waken en dromen' },
+      ]},
+      { nr: '14', file: 'paintings-new/IMG_0262.webp', current: 'Rust', options: [
+        { name: 'Rust' },
+        { name: 'Dagdroom' },
+        { name: 'Liggende Vrouw' },
+      ]},
+      { nr: '15', file: 'paintings-new/IMG_0284.webp', current: 'De Monnik', options: [
+        { name: 'De Monnik' },
+        { name: 'Jonge Monnik' },
+        { name: 'Stilte in Saffraan', hint: 'Saffraan is de kleur van boeddhistische monniksgewaden — symbool van onthechting en wijsheid' },
+      ]},
+      { nr: '16', file: 'paintings-new/IMG_0282.webp', current: 'Bloesemmeisje', options: [
+        { name: 'Bloesemmeisje' },
+        { name: 'Peking Opera', hint: 'De dramatische oogmake-up en het theatrale kapsel passen bij dit genre' },
+        { name: 'Chinese Hofdame', hint: 'De rijke kleding, gouden haarsierade en houding van een vrouw aan het keizerlijk hof' },
+        { name: 'De Chinese Bruid', hint: 'Niet helemaal accuraat — lijkt meer op een hofdame of Opera-figuur dan een bruid' },
+        { name: 'Rode Bloesem' },
+      ]},
+      { nr: '17', file: 'paintings-new/IMG_0299.webp', current: 'Vlinder', options: [
+        { name: 'Vlinder' },
+        { name: 'Nacht met Kwasten', hint: 'De donkere achtergrond + de echte kwasten die aan het doek bevestigd zijn' },
+        { name: 'De Droomster', hint: 'Het liggende figuur in een dromerige, speelse sfeer' },
+      ]},
+      { nr: '19', file: 'paintings-new/IMG_0288.webp', current: 'Geliefden', options: [
+        { name: 'Geliefden' },
+        { name: 'Tortelduifjes', hint: 'Letterlijk — het zijn twee duifjes op een tak' },
+        { name: 'Lente van het Hart', hint: 'Het hartje boven de vogels, de bloemen, de vrolijke kleuren' },
+      ]},
+      { nr: '20', file: 'paintings-new/IMG_0290.webp', current: 'Vogel & Bloem', options: [
+        { name: 'Vogel & Bloem' },
+        { name: 'Blauwe Vogel', hint: 'De blauwe vogel als hoofdpersonage' },
+        { name: 'Orchidee & Zwaluw', hint: 'De bloem lijkt op een orchidee; de vogel op een zwaluw — meer specifiek dan "vogel & bloem"' },
+      ]},
+      { nr: '21', file: 'paintings-new/IMG_0291.webp', current: 'Meisje met Vogel', options: [
+        { name: 'Meisje met Vogel' },
+        { name: 'Meisje met Zwaluw', hint: 'De blauwe vogel op haar schouder is een zwaluw' },
+        { name: 'Het Blauwe Bezoek', hint: 'De vogel als bezoeker — poëtischer, mysterieuzer' },
+        { name: 'Bezoek op Schouder' },
+      ]},
+    ];
+
+    const container = document.getElementById('paintings');
+
+    data.forEach(p => {
+      const div = document.createElement('div');
+      div.className = 'painting';
+      div.innerHTML = `
+        <img src="${p.file}" alt="${p.current}">
+        <div class="painting-info">
+          <div class="painting-number">Schilderij ${p.nr}</div>
+          <div class="painting-current">Huidige titel: <strong>${p.current}</strong></div>
+          <div class="options">
+            ${p.options.map((opt, i) => `
+              <div class="option" onclick="select(this, '${p.nr}')">
+                <input type="radio" name="p${p.nr}" id="p${p.nr}_${i}" value="${opt.name}">
+                <label for="p${p.nr}_${i}">
+                  ${opt.name}
+                  ${opt.hint ? '<span class="hint">' + opt.hint + '</span>' : ''}
+                </label>
+                ${opt.name === p.current ? '<span class="tag">huidig</span>' : ''}
+              </div>
+            `).join('')}
+            <div class="option-custom" onclick="selectCustom(this, '${p.nr}')">
+              <input type="radio" name="p${p.nr}" id="p${p.nr}_custom" value="">
+              <input type="text" placeholder="Eigen titel..." id="p${p.nr}_custom_text"
+                     onfocus="selectCustom(this.parentElement, '${p.nr}')"
+                     oninput="updateCustomValue('${p.nr}')">
+            </div>
+          </div>
+        </div>
+      `;
+      container.appendChild(div);
+    });
+
+    function select(el, nr) {
+      const radio = el.querySelector('input[type="radio"]');
+      radio.checked = true;
+      el.closest('.options').querySelectorAll('.option, .option-custom').forEach(o => o.classList.remove('selected'));
+      el.classList.add('selected');
+      updateSummary();
+    }
+
+    function selectCustom(el, nr) {
+      const radio = el.querySelector('input[type="radio"]');
+      radio.checked = true;
+      el.closest('.options').querySelectorAll('.option, .option-custom').forEach(o => o.classList.remove('selected'));
+      el.classList.add('selected');
+      el.querySelector('input[type="text"]').focus();
+      updateSummary();
+    }
+
+    function updateCustomValue(nr) {
+      const text = document.getElementById(`p${nr}_custom_text`).value;
+      document.getElementById(`p${nr}_custom`).value = text;
+      updateSummary();
+    }
+
+    function updateSummary() {
+      let chosen = 0;
+      data.forEach(p => {
+        const checked = document.querySelector(`input[name="p${p.nr}"]:checked`);
+        if (checked && (checked.value || checked.id.includes('custom'))) chosen++;
+      });
+      document.getElementById('summary-text').innerHTML = `<strong>${chosen}</strong> van ${data.length} gekozen`;
+    }
+
+    function copyChoices() {
+      const lines = data.map(p => {
+        const checked = document.querySelector(`input[name="p${p.nr}"]:checked`);
+        let choice = '(niet gekozen)';
+        if (checked && checked.value) choice = checked.value;
+        else if (checked && checked.id.includes('custom')) choice = '(eigen titel niet ingevuld)';
+        return `${p.nr}: ${choice}`;
+      });
+      const text = 'Titelkeuze Deva Saal\n' + '='.repeat(25) + '\n' + lines.join('\n');
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.querySelector('.btn-copy');
+        btn.textContent = 'Gekopieerd!';
+        setTimeout(() => btn.textContent = 'Kopieer keuzes', 2000);
+      });
+    }
+  </script>
+</body>
+</html>

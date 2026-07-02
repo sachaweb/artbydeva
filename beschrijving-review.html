@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Beschrijving Review — Deva Saal</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #1a1a2e;
+      color: #e0d8e8;
+      padding: 24px;
+      line-height: 1.6;
+    }
+    h1 {
+      text-align: center;
+      font-size: 28px;
+      color: #D8A93C;
+      margin-bottom: 8px;
+    }
+    .intro {
+      text-align: center;
+      color: #9D93A6;
+      max-width: 700px;
+      margin: 0 auto 12px;
+      font-size: 14px;
+    }
+    .counter-bar {
+      text-align: center;
+      margin-bottom: 32px;
+      font-size: 14px;
+      color: #9D93A6;
+    }
+    .counter-bar span { color: #D8A93C; font-weight: 600; }
+    .copy-btn {
+      display: block;
+      margin: 0 auto 40px;
+      padding: 12px 32px;
+      background: #D8A93C;
+      color: #1a1a2e;
+      border: none;
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .copy-btn:hover { background: #e6bc5a; }
+
+    /* Sections */
+    .section-divider {
+      text-align: center;
+      margin: 48px 0 24px;
+      padding: 12px 0;
+      border-top: 2px solid #D8A93C;
+      border-bottom: 1px solid #2a2a4e;
+    }
+    .section-divider h2 {
+      color: #D8A93C;
+      font-size: 20px;
+    }
+    .section-divider p {
+      color: #9D93A6;
+      font-size: 13px;
+      margin-top: 4px;
+    }
+
+    /* Card */
+    .card {
+      background: #22223a;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 28px;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .card-header {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+    .card-header img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+    .card-header-text {
+      flex: 1;
+    }
+    .card-number {
+      color: #D8A93C;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .card-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #F1EADB;
+      margin: 2px 0 4px;
+    }
+    .card-issue {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+    .issue-wrong { background: #5c2020; color: #f5a0a0; }
+    .issue-commercial { background: #4a3a10; color: #e6c55a; }
+    .issue-check { background: #1a3a3a; color: #7ecaca; }
+    .issue-image { background: #2a2050; color: #b0a0e0; }
+
+    .desc-block {
+      margin-top: 12px;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      line-height: 1.65;
+    }
+    .desc-current {
+      background: #2e1a1a;
+      border-left: 3px solid #a04040;
+    }
+    .desc-current .desc-label { color: #d08080; }
+    .desc-proposed {
+      background: #1a2e1a;
+      border-left: 3px solid #40a040;
+      margin-top: 8px;
+    }
+    .desc-proposed .desc-label { color: #80d080; }
+    .desc-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .desc-highlight {
+      background: #5c2020;
+      color: #f5c0c0;
+      padding: 1px 4px;
+      border-radius: 3px;
+    }
+    .desc-highlight-commercial {
+      background: #4a3a10;
+      color: #e6c55a;
+      padding: 1px 4px;
+      border-radius: 3px;
+    }
+
+    .question-box {
+      background: #1a2a3a;
+      border-left: 3px solid #5090c0;
+      padding: 10px 14px;
+      border-radius: 0 8px 8px 0;
+      margin-top: 8px;
+      font-size: 13px;
+      color: #a0c8e8;
+    }
+    .question-box strong { color: #70b8e8; }
+
+    /* Radio & text */
+    .choice-row {
+      margin-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .choice-row label {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 14px;
+      cursor: pointer;
+      padding: 6px 10px;
+      border-radius: 6px;
+      transition: background 0.15s;
+    }
+    .choice-row label:hover { background: #2a2a50; }
+    .choice-row input[type="radio"] {
+      margin-top: 3px;
+      accent-color: #D8A93C;
+    }
+    .free-text {
+      width: 100%;
+      margin-top: 8px;
+      padding: 10px 12px;
+      background: #1a1a2e;
+      border: 1px solid #3a3a5e;
+      border-radius: 6px;
+      color: #e0d8e8;
+      font-size: 14px;
+      font-family: inherit;
+      resize: vertical;
+      min-height: 60px;
+    }
+    .free-text::placeholder { color: #6a6a8e; }
+    .free-text:focus { outline: none; border-color: #D8A93C; }
+
+    /* Image quality section */
+    .img-issue-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+      max-width: 900px;
+      margin: 0 auto 32px;
+    }
+    .img-issue-card {
+      background: #22223a;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .img-issue-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+    .img-issue-card .img-info {
+      padding: 10px 12px;
+    }
+    .img-issue-card .img-title {
+      font-weight: 600;
+      font-size: 13px;
+      color: #F1EADB;
+    }
+    .img-issue-card .img-problem {
+      font-size: 12px;
+      color: #d0a0a0;
+      margin-top: 4px;
+    }
+
+    @media (max-width: 600px) {
+      .card-header { flex-direction: column; }
+      .card-header img { width: 100%; height: 200px; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Beschrijvingen & Beeldkwaliteit Review</h1>
+  <p class="intro">Per schilderij: de huidige beschrijving met gemarkeerde problemen, een nieuw voorstel, en een veld voor jullie eigen tekst. Kies per stuk: huidig behouden, voorstel overnemen, of eigen tekst.</p>
+  <p class="counter-bar">Keuzes gemaakt: <span id="counter">0</span> / <span id="total">0</span></p>
+
+  <button class="copy-btn" onclick="copyChoices()">Kopieer alle keuzes naar klembord</button>
+
+  <!-- ============================================ -->
+  <!-- SECTION: FEITELIJK ONJUIST -->
+  <!-- ============================================ -->
+  <div class="section-divider">
+    <h2>&#10060; Feitelijk onjuist</h2>
+    <p>Beschrijvingen die niet kloppen met wat er op het schilderij te zien is</p>
+  </div>
+
+  <!-- #01 De Drie Zusters -->
+  <div class="card" data-id="01">
+    <div class="card-header">
+      <img src="paintings-new/IMG_0279.webp" alt="De Drie Zusters">
+      <div class="card-header-text">
+        <span class="card-number">#01</span>
+        <div class="card-title">De Drie Zusters</div>
+        <span class="card-issue issue-wrong">Onjuist</span>
+        <span class="card-issue issue-commercial">Commercieel</span>
+      </div>
+    </div>
+    <div class="desc-block desc-current">
+      <span class="desc-label">Huidig (NL)</span>
+      <span class="desc-highlight">De drievoudige godin — schepper, bewaarder, vernietiger</span> — samengebracht in één doek. Bladgoud en dik opgebracht reliëf geven de figuren een bijna sculpturaal karakter. <span class="desc-highlight-commercial">Een van de meest ambitieuze werken in de collectie.</span>
+    </div>
+    <div class="desc-block desc-proposed">
+      <span class="desc-label">Voorstel (NL)</span>
+      Drie vrouwen in groen, oranje en blauw — elk met een eigen blik, samen een eenheid. De gewaden zijn in dik reliëf geschilderd en de gouden tulbanden glinsteren. Een groot formaat werk dat de ruimte vult.
+    </div>
+    <div class="desc-block desc-current" style="margin-top:12px;">
+      <span class="desc-label">Huidig (EN)</span>
+      <span class="desc-highlight">The triple goddess — creator, preserver, destroyer</span> — united on one canvas. Gold leaf and thickly applied relief give the figures an almost sculptural quality. <span class="desc-highlight-commercial">One of the most ambitious works in the collection.</span>
+    </div>
+    <div class="desc-block desc-proposed">
+      <span class="desc-label">Voorstel (EN)</span>
+      Three women in green, orange and blue — each with her own gaze, together a unity. The robes are painted in thick relief and the golden turbans glisten. A large-format work that fills the room.
+    </div>
+    <div class="choice-row">
+      <label><input type="radio" name="choice-01" value="huidig" onchange="updateCounter()"> Huidig behouden</label>
+      <label><input type="radio" name="choice-01" value="voorstel" onchange="updateCounter()"> Voorstel overnemen</label>
+      <label><input type="radio" name="choice-01" value="eigen" onchange="updateCounter()"> Eigen tekst:</label>
+    </div>
+    <textarea class="free-text" data-for="01" placeholder="Eigen beschrijving (NL + EN)..."></textarea>
+  </div>
+
+  <!-- #10 Droomster in Groen -->
+  <div class="card" data-id="10">
+    <div class="card-header">
+      <img src="paintings-new/IMG_0275.webp" alt="Droomster in Groen">
+      <div class="card-header-text">
+        <span class="card-number">#10</span>
+        <div class="card-title">Droomster in Groen</div>
+        <span class="card-issue issue-wrong">Onjuist</span>
+        <span class="card-issue issue-commercial">Commercieel</span>
+      </div>
+    </div>
+    <div class="desc-block desc-current">
+      <span class="desc-label">Huidig (NL)</span>
+      <span class="desc-highlight">De gesloten ogen</span> maken dit <span class="desc-highlight-commercial">het meest contemplatieve werk in de collectie</span>. Het groen werkt kalmerend — <span class="desc-highlight-commercial">dit is een schilderij dat rust brengt in de ruimte waar het hangt.</span>
+    </div>
+    <div class="desc-block desc-proposed">
+      <span class="desc-label">Voorstel (NL)</span>
+      De halfgeloken ogen en de neergeslagen blik geven dit werk een contemplatief karakter. Het groen werkt kalmerend, de gouden strepen in de doek geven warmte en diepte.
+    </div>
+    <div class="desc-block desc-current" style="margin-top:12px;">
+      <span class="desc-label">Huidig (EN)</span>
+      <span class="desc-highlight">The closed eyes</span> make this <span class="desc-highlight-commercial">the most contemplative work in the collection</span>. The green has a calming effect — <span class="desc-highlight-commercial">this is a painting that brings stillness to the room where it hangs.</span>
+    </div>
+    <div class="desc-block desc-proposed">
+      <span class="desc-label">Voorstel (EN)</span>
+      The half-closed eyes and downward gaze give this work a contemplative character. The green has a calming effect, while the golden streaks in the cloth add warmth and depth.
+    </div>
+    <div class="choice-row">
+      <label><input type="radio" name="choice-10" value="huidig" onchange="updateCounter()"> Huidig behouden</label>
+      <label><input type="radio" name="choice-10" value="voorstel" onchange="updateCounter()"> Voorstel overnemen</label>
+      <label><input type="radio" name="choice-10" value="eigen" onchange="updateCounter()"> Eigen tekst:</label>
+    </div>
+    <textarea class="free-text" data-for="10" placeholder="Eigen beschrijving (NL + EN)..."></textarea>
+  </div>
+
+  <!-- #13 Kracht -->
+  <div class="card" data-id="13">
+    <div class="card-header">
+      <img src="paintings-new/IMG_0297.webp" alt="Kracht">
+      <div class="card-header-text">
+        <span class="card-number">#13</span>
+        <div class="card-title">Kracht</div>
+        <span class="card-issue issue-wrong">Mismatch met titel</span>
+      </div>
+    </div>
+    <div class="desc-block desc-current">
+      <span class="desc-label">Huidig (NL)</span>
+      <span class="desc-highlight">Alsof gezien door water of door een herinnering die langzaam vervaagt.</span> De kleuren lopen in elkaar over zonder scherpe grenzen — <span class="desc-highlight">dit is schilderen als dromen.</span>
+    </div>
+    <div class="desc-block desc-proposed">
+      <span class="desc-label">Voorstel (NL)</span>
+      Een profiel in turquoise en oker dat dwars door het doek heen lijkt te kijken. De kleuren zijn onnatuurlijk en bewust gekozen — dit is geen portret naar het leven, maar een innerlijk beeld. De blik is direct en onverzettelijk.
+    </div>
+    <div class="desc-block desc-current" style="margin-top:12px;">
+      <span class="desc-label">Huidig (EN)</span>
+      <span class="desc-highlight">As if seen through water or through a memory slowly fading.</span> The colours bleed into each other without sharp edges — <span class="desc-highlight">this is painting as dreaming.</span>
+    </div>
+    <div class="desc-block desc-proposed">
+      <span class="desc-label">Voorstel (EN)</span>
+      A profile in turquoise and ochre that seems to look straight through the canvas. The colours are unnatural and deliberately chosen — this is not a portrait from life, but an inner image. The gaze is direct and unyielding.
+    </div>
+    <div class="choice-row">
+      <label><input type="radio" name="choice-13" value="huidig" onchange="updateCounter()"> Huidig behouden</label>
+      <label><input type="radio" name="choice-13" value="voorstel" onchange="updateCounter()"> Voorstel overnemen</label>
+      <label><input type="radio" name="choice-13" value="eigen" onchange="updateCounter()"> Eigen tekst:</label>
+    </div>
+    <textarea class="free-text" data-for="13" placeholder="Eigen beschrijving (NL + EN)..."></textarea>
+  </div>
+
+  <!-- #14 Dagdroom -->
+  <div class="card" data-id="14">
+    <div class="card-header">
+      <img src="paintings-new/IMG_0262.webp" alt="Dagdroom">
+      <div class="card-header-text">
+        <span class="card-number">#14</span>
+        <div class="card-title">Dagdroom</div>
+        <span class="card-issue issue-wrong">Onjuiste vergelijking</span>
+      </div>
+    </div>
+    <div class="desc-block desc-current">
+      <span class="desc-label">Huidig (NL)</span>
+      Kwetsbaar en direct — geen sluier, geen sieraad, geen afstand. De expressieve lijnen en het bewust versimpelde gezicht <span class="desc-highlight">doen denken aan Modigliani</span>, maar de warmte is eigen.
+    </div>
+    <div class="desc-block desc-proposed">
+      <span class="desc-label">Voorstel (NL)</span>
+      Kwetsbaar en direct — geen sluier, geen sieraad, geen afstand. De grote groene ogen en de expressieve lijnen geven het gezicht iets dromerigs. Een van de vroegere werken (2006), geschilderd met bewuste eenvoud.
+    </div>
+    <div class="desc-block desc-current" style="margin-top:12px;">
+      <span class="desc-label">Huidig (EN)</span>
+      Vulnerable and direct — no veil, no ornament, no distance. The expressive lines and deliberately simplified face <span class="desc-highlight">are reminiscent of Modigliani</span>, but the warmth is entirely her own.
+    </div>
+    <div class="desc-block desc-proposed">
+      <span class="desc-label">Voorstel (EN)</span>
+      Vulnerable and direct — no veil, no ornament, no distance. The large green eyes and expressive lines give the face a dreamlike quality. One of the earlier works (2006), painted with deliberate simplicity.
+    </div>
+    <div class="choice-row">
+      <label><input type="radio" name="choice-14" value="huidig" onchange="updateCounter()"> Huidig behouden</label>
+      <label><input type="radio" name="choice-14" value="voorstel" onchange="updateCounter()"> Voorstel overnemen</label>
+      <label><input type="radio" name="choice-14" value="eigen" onchange="updateCounter()"> Eigen tekst:</label>
+    </div>
+    <textarea class="free-text" data-for="14" placeholder="Eigen beschrijving (NL + EN)..."></textarea>
+  </div>
+
+  <!-- #12 Tweezaamheid -->
+  <div class="card" data-id="12">
+    <div class="card-header">
+      <img src="paintings-new/IMG_0249.webp" alt="Tweezaamheid">
+      <div class="card-header-text">
+        <span class="card-number">#12</span>
+        <div class="card-title">Tweezaamheid</div>
+        <span class="card-issue issue-wrong">Onjuiste beschrijving stijl</span>
+      </div>
+    </div>
+    <div class="desc-block desc-current">
+      <span class="desc-label">Huidig (NL)</span>
+      De ruimte tussen de twee gezichten is het eigenlijke onderwerp — dat halve centimeter dat een kus scheidt van een belofte. <span class="desc-highlight">De expressieve lijnen zijn hier bewust ruw gelaten.</span>
+    </div>
+    <div class="desc-block desc-proposed">
+      <span class="desc-label">Voorstel (NL)</span>
+      De ruimte tussen de twee gezichten is het eigenlijke onderwerp — dat halve centimeter dat een kus scheidt van een belofte. De lijnen zijn vloeiend en beheerst, de kleuren contrasteren: donker haar en blond, rode lippen en roze.
+    </div>
+    <div class="desc-block desc-current" style="margin-top:12px;">
+      <span class="desc-label">Huidig (EN)</span>
+      The space between the two faces is the real subject — that half centimetre separating a kiss from a promise. <span class="desc-highlight">The expressive lines are deliberately left raw here.</span>
+    </div>
+    <div class="desc-block desc-proposed">
+      <span class="desc-label">Voorstel (EN)</span>
+      The space between the two faces is the real subject — that half centimetre separating a kiss from a promise. The lines are fluid and controlled, the colours contrast: dark hair and blonde, red lips and pink.
+    </div>
+    <div class="choice-row">
+      <label><input type="radio" name="choice-12" value="huidig" onchange="updateCounter()"> Huidig behouden</label>
+      <label><input type="radio" name="choice-12" value="voorstel" onchange="updateCounter()"> Voorstel overnemen</label>
+      <label><input type="radio" name="choice-12" value="eigen" onchange="updateCounter()"> Eigen tekst:</label>
+    </div>
+    <textarea class="free-text" data-for="12" placeholder="Eigen beschrijving (NL + EN)..."></textarea>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- SECTION: TE COMMERCIEEL -->
+  <!-- ============================================ -->
+  <div class="section-divider">
+    <h2>&#128722; Te commercieel</h2>
+    <p>Beschrijvingen die klinken als verkooppraatje of galeriebrochure</p>
+  </div>
+
+  <!-- #02 Madonna van het Licht -->
+  <div class="card" data-id="02">
+    <div class="card-header">
+      <img src="paintings-new/IMG_0255.webp" alt="Madonna van het Licht">
+      <div class="card-header-text">
+        <span class="card-number">#02</span>
+        <div class="card-title">Madonna van het Licht</div>
+        <span class="card-issue issue-commercial">Commercieel</span>
+      </div>
+    </div>
+    <div class="desc-block desc-current">
+      <span class="desc-label">Huidig (NL)</span>
+      Het bladgoud vangt het licht op een manier die verandert met het tijdstip van de dag. De roze elementen rondom zweven als zegeningen — abstract en decoratief, niet figuratief. <span class="desc-highlight-commercial">Een icoon voor aan de muur.</span>
+    </div>
+    <div class="desc-block desc-proposed">
+      <span class="desc-label">Voorstel (NL)</span>
+      Het bladgoud vangt het licht op een manier die verandert met het tijdstip van de dag. De roze elementen rondom zweven als zegeningen — abstract en decoratief, niet figuratief. De groen-gouden mantel is in reliëf opgebracht.
+    </div>
+    <div class="desc-block desc-current" style="margin-top:12px;">
+      <span class="desc-label">Huidig (EN)</span>
+      The gold leaf catches light in ways that shift throughout the day. The pink elements float around her like blessings — abstract and decorative, not figurative. <span class="desc-highlight-commercial">An icon for the wall.</span>
+    </div>
+    <div class="desc-block desc-proposed">
+      <span class="desc-label">Voorstel (EN)</span>
+      The gold leaf catches light in ways that shift throughout the day. The pink elements float around her like blessings — abstract and decorative, not figurative. The green-gold mantle is applied in relief.
+    </div>
+    <div class="choice-row">
+      <label><input type="radio" name="choice-02" value="huidig" onchange="updateCounter()"> Huidig behouden</label>
+      <label><input type="radio" name="choice-02" value="voorstel" onchange="updateCounter()"> Voorstel overnemen</label>
+      <label><input type="radio" name="choice-02" value="eigen" onchange="updateCounter()"> Eigen tekst:</label>
+    </div>
+    <textarea class="free-text" data-for="02" placeholder="Eigen beschrijving (NL + EN)..."></textarea>
+  </div>
+
+  <!-- #09 Stille Kracht -->
+  <div class="card" data-id="09">
+    <div class="card-header">
+      <img src="paintings-new/IMG_0263.webp" alt="Stille Kracht">
+      <div class="card-header-text">
+        <span class="card-number">#09</span>
+        <div class="card-title">Stille Kracht</div>
+        <span class="card-issue issue-commercial">Commercieel</span>
+      </div>
+    </div>
+    <div class="desc-block desc-current">
+      <span class="desc-label">Huidig (NL)</span>
+      Geschilderd in dikke, pasteuze lagen die je met je vingers zou willen volgen. De verfopbouw geeft het portret een fysieke aanwezigheid — <span class="desc-highlight-commercial">het kijkt je aan vanuit het doek alsof het leeft.</span>
+    </div>
+    <div class="desc-block desc-proposed">
+      <span class="desc-label">Voorstel (NL)</span>
+      Geschilderd in dikke, pasteuze lagen die je met je vingers zou willen volgen. De verfopbouw geeft het portret een fysieke aanwezigheid — de directe blik en de trotse houding dragen de titel.
+    </div>
+    <div class="desc-block desc-current" style="margin-top:12px;">
+      <span class="desc-label">Huidig (EN)</span>
+      Painted in thick, impasto layers that your fingers want to follow. The paint build-up gives the portrait a physical presence — <span class="desc-highlight-commercial">it looks at you from the canvas as if alive.</span>
+    </div>
+    <div class="desc-block desc-proposed">
+      <span class="desc-label">Voorstel (EN)</span>
+      Painted in thick, impasto layers that your fingers want to follow. The paint build-up gives the portrait a physical presence — the direct gaze and proud bearing carry the title.
+    </div>
+    <div class="choice-row">
+      <label><input type="radio" name="choice-09" value="huidig" onchange="updateCounter()"> Huidig behouden</label>
+      <label><input type="radio" name="choice-09" value="voorstel" onchange="updateCounter()"> Voorstel overnemen</label>
+      <label><input type="radio" name="choice-09" value="eigen" onchange="updateCounter()"> Eigen tekst:</label>
+    </div>
+    <textarea class="free-text" data-for="09" placeholder="Eigen beschrijving (NL + EN)..."></textarea>
+  </div>
+
+  <!-- #16 Rode Bloesem -->
+  <div class="card" data-id="16">
+    <div class="card-header">
+      <img src="paintings-new/IMG_0282.webp" alt="Rode Bloesem">
+      <div class="card-header-text">
+        <span class="card-number">#16</span>
+        <div class="card-title">Rode Bloesem</div>
+        <span class="card-issue issue-commercial">Commercieel</span>
+      </div>
+    </div>
+    <div class="desc-block desc-current">
+      <span class="desc-label">Huidig (NL)</span>
+      Een van de kleurrijkste en meest gedetailleerde werken — elke bloem op het gewaad is individueel geschilderd. De gouden haarsieraden zijn in reliëf opgebracht. <span class="desc-highlight-commercial">Een viering van ambacht en overdaad.</span>
+    </div>
+    <div class="desc-block desc-proposed">
+      <span class="desc-label">Voorstel (NL)</span>
+      Elke bloem op het gewaad is individueel geschilderd, de gouden haarsieraden zijn in reliëf opgebracht. De blauwe achtergrond laat de rode en gouden tinten hard spreken. Een van de meest gedetailleerde werken in de collectie.
+    </div>
+    <div class="desc-block desc-current" style="margin-top:12px;">
+      <span class="desc-label">Huidig (EN)</span>
+      One of the most colourful and detailed works — every flower on the robe is individually painted. The golden hair ornaments are applied in relief. <span class="desc-highlight-commercial">A celebration of craft and abundance.</span>
+    </div>
+    <div class="desc-block desc-proposed">
+      <span class="desc-label">Voorstel (EN)</span>
+      Every flower on the robe is individually painted, the golden hair ornaments applied in relief. The blue background lets the reds and golds speak boldly. One of the most detailed works in the collection.
+    </div>
+    <div class="choice-row">
+      <label><input type="radio" name="choice-16" value="huidig" onchange="updateCounter()"> Huidig behouden</label>
+      <label><input type="radio" name="choice-16" value="voorstel" onchange="updateCounter()"> Voorstel overnemen</label>
+      <label><input type="radio" name="choice-16" value="eigen" onchange="updateCounter()"> Eigen tekst:</label>
+    </div>
+    <textarea class="free-text" data-for="16" placeholder="Eigen beschrijving (NL + EN)..."></textarea>
+  </div>
+
+  <!-- #19 Lente van het Hart -->
+  <div class="card" data-id="19">
+    <div class="card-header">
+      <img src="paintings-new/IMG_0288.webp" alt="Lente van het Hart">
+      <div class="card-header-text">
+        <span class="card-number">#19</span>
+        <div class="card-title">Lente van het Hart</div>
+        <span class="card-issue issue-commercial">Commercieel</span>
+      </div>
+    </div>
+    <div class="desc-block desc-current">
+      <span class="desc-label">Huidig (NL)</span>
+      Folkloristisch en ongegeneerd vrolijk — een breuk met de meer devotionele werken in de collectie. De warme kleuren en het speelse hartje maken dit <span class="desc-highlight-commercial">een ideaal cadeau-schilderij.</span>
+    </div>
+    <div class="desc-block desc-proposed">
+      <span class="desc-label">Voorstel (NL)</span>
+      Folkloristisch en ongegeneerd vrolijk — twee vogels, een hartje, bloemen in overvloed. Een breuk met de meer devotionele werken in de collectie, geschilderd met het plezier van vrij werken.
+    </div>
+    <div class="desc-block desc-current" style="margin-top:12px;">
+      <span class="desc-label">Huidig (EN)</span>
+      Folksy and unabashedly cheerful — a break from the more devotional works in the collection. The warm colours and playful heart make this <span class="desc-highlight-commercial">an ideal gift painting.</span>
+    </div>
+    <div class="desc-block desc-proposed">
+      <span class="desc-label">Voorstel (EN)</span>
+      Folksy and unabashedly cheerful — two birds, a heart, flowers in abundance. A break from the more devotional works in the collection, painted with the pleasure of working freely.
+    </div>
+    <div class="choice-row">
+      <label><input type="radio" name="choice-19" value="huidig" onchange="updateCounter()"> Huidig behouden</label>
+      <label><input type="radio" name="choice-19" value="voorstel" onchange="updateCounter()"> Voorstel overnemen</label>
+      <label><input type="radio" name="choice-19" value="eigen" onchange="updateCounter()"> Eigen tekst:</label>
+    </div>
+    <textarea class="free-text" data-for="19" placeholder="Eigen beschrijving (NL + EN)..."></textarea>
+  </div>
+
+  <!-- #20 Vogel & Bloem -->
+  <div class="card" data-id="20">
+    <div class="card-header">
+      <img src="paintings-new/IMG_0290.webp" alt="Vogel & Bloem">
+      <div class="card-header-text">
+        <span class="card-number">#20</span>
+        <div class="card-title">Vogel & Bloem</div>
+        <span class="card-issue issue-commercial">Commercieel</span>
+      </div>
+    </div>
+    <div class="desc-block desc-current">
+      <span class="desc-label">Huidig (NL)</span>
+      Decoratief en levendig — geschilderd met het plezier van iemand die geniet van kleur. De tropische sfeer maakt het <span class="desc-highlight-commercial">een stuk dat een kamer opvrolijkt zonder iets te eisen.</span>
+    </div>
+    <div class="desc-block desc-proposed">
+      <span class="desc-label">Voorstel (NL)</span>
+      Decoratief en levendig — grote donkerrode bloemen tegen een helderblauw vlak, met een vogel als speels accent. Tropisch van sfeer, geschilderd met losse hand en plezier in kleur.
+    </div>
+    <div class="desc-block desc-current" style="margin-top:12px;">
+      <span class="desc-label">Huidig (EN)</span>
+      Decorative and lively — painted with the pleasure of someone who delights in colour. The tropical feel makes it <span class="desc-highlight-commercial">a piece that brightens a room without demanding anything.</span>
+    </div>
+    <div class="desc-block desc-proposed">
+      <span class="desc-label">Voorstel (EN)</span>
+      Decorative and lively — large dark-red flowers against a bright blue surface, with a bird as a playful accent. Tropical in feel, painted with a loose hand and delight in colour.
+    </div>
+    <div class="choice-row">
+      <label><input type="radio" name="choice-20" value="huidig" onchange="updateCounter()"> Huidig behouden</label>
+      <label><input type="radio" name="choice-20" value="voorstel" onchange="updateCounter()"> Voorstel overnemen</label>
+      <label><input type="radio" name="choice-20" value="eigen" onchange="updateCounter()"> Eigen tekst:</label>
+    </div>
+    <textarea class="free-text" data-for="20" placeholder="Eigen beschrijving (NL + EN)..."></textarea>
+  </div>
+
+  <!-- #21 Meisje met Vogel -->
+  <div class="card" data-id="21">
+    <div class="card-header">
+      <img src="paintings-new/IMG_0291.webp" alt="Meisje met Vogel">
+      <div class="card-header-text">
+        <span class="card-number">#21</span>
+        <div class="card-title">Meisje met Vogel</div>
+        <span class="card-issue issue-commercial">Commercieel</span>
+      </div>
+    </div>
+    <div class="desc-block desc-current">
+      <span class="desc-label">Huidig (NL)</span>
+      <span class="desc-highlight-commercial">Het zachtste werk in de collectie.</span> De vogel op haar schouder voelt als een bezoeker uit een andere wereld — even neergestreken, zo weer weg.
+    </div>
+    <div class="desc-block desc-proposed">
+      <span class="desc-label">Voorstel (NL)</span>
+      Een warm portret met een speelse blik. De vogel op haar schouder voelt als een bezoeker uit een andere wereld — even neergestreken, zo weer weg. De bloem in haar haar echoot de kleuren van de vogel.
+    </div>
+    <div class="desc-block desc-current" style="margin-top:12px;">
+      <span class="desc-label">Huidig (EN)</span>
+      <span class="desc-highlight-commercial">The softest work in the collection.</span> The bird on her shoulder feels like a visitor from another world — alighted for a moment, soon to fly away.
+    </div>
+    <div class="desc-block desc-proposed">
+      <span class="desc-label">Voorstel (EN)</span>
+      A warm portrait with a playful gaze. The bird on her shoulder feels like a visitor from another world — alighted for a moment, soon to fly away. The flower in her hair echoes the colours of the bird.
+    </div>
+    <div class="choice-row">
+      <label><input type="radio" name="choice-21" value="huidig" onchange="updateCounter()"> Huidig behouden</label>
+      <label><input type="radio" name="choice-21" value="voorstel" onchange="updateCounter()"> Voorstel overnemen</label>
+      <label><input type="radio" name="choice-21" value="eigen" onchange="updateCounter()"> Eigen tekst:</label>
+    </div>
+    <textarea class="free-text" data-for="21" placeholder="Eigen beschrijving (NL + EN)..."></textarea>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- SECTION: TWIJFELGEVALLEN — CHECK MET DEVA -->
+  <!-- ============================================ -->
+  <div class="section-divider">
+    <h2>&#10067; Twijfelgevallen — check met Deva</h2>
+    <p>Claims die ik niet zeker kan verifiëren vanaf foto's</p>
+  </div>
+
+  <!-- #06 Gesluierde in Oranje -->
+  <div class="card" data-id="06">
+    <div class="card-header">
+      <img src="paintings-new/IMG_0253.webp" alt="Gesluierde in Oranje">
+      <div class="card-header-text">
+        <span class="card-number">#06</span>
+        <div class="card-title">Gesluierde in Oranje</div>
+        <span class="card-issue issue-check">Check met Deva</span>
+      </div>
+    </div>
+    <div class="question-box">
+      <strong>Vraag:</strong> Ik schreef "gouden munten" — maar het lijken eerder ronde medaillons of borduurwerk in de stof. Wat is het precies?
+    </div>
+    <div class="desc-block desc-current">
+      <span class="desc-label">Huidig (NL)</span>
+      Echte stof en <span class="desc-highlight">gouden munten</span> zijn in het doek verwerkt — dit schilderij vraagt om van dichtbij bekeken te worden. De grens tussen schilderkunst en sculptuur vervaagt. Raak het bijna aan.
+    </div>
+    <div class="desc-block desc-proposed">
+      <span class="desc-label">Voorstel als het geen munten zijn (NL)</span>
+      Echte stof en gouden medaillons zijn in het doek verwerkt — dit schilderij vraagt om van dichtbij bekeken te worden. De grens tussen schilderkunst en sculptuur vervaagt.
+    </div>
+    <div class="choice-row">
+      <label><input type="radio" name="choice-06" value="huidig" onchange="updateCounter()"> Huidig behouden (het zijn wél munten)</label>
+      <label><input type="radio" name="choice-06" value="voorstel" onchange="updateCounter()"> Voorstel (medaillons)</label>
+      <label><input type="radio" name="choice-06" value="eigen" onchange="updateCounter()"> Eigen tekst:</label>
+    </div>
+    <textarea class="free-text" data-for="06" placeholder="Wat is het precies? ..."></textarea>
+  </div>
+
+  <!-- #04 Geborgenheid -->
+  <div class="card" data-id="04">
+    <div class="card-header">
+      <img src="paintings-new/IMG_0277.webp" alt="Geborgenheid">
+      <div class="card-header-text">
+        <span class="card-number">#04</span>
+        <div class="card-title">Geborgenheid</div>
+        <span class="card-issue issue-check">Check met Deva</span>
+      </div>
+    </div>
+    <div class="question-box">
+      <strong>Vraag:</strong> Ik schreef "geschilderd zonder sentimentaliteit" — maar het IS een moeder-kind schilderij. Is het bewust niet-sentimenteel, of is het juist wél teder bedoeld?
+    </div>
+    <div class="desc-block desc-current">
+      <span class="desc-label">Huidig (NL)</span>
+      Het wit reliëf op de achtergrond werkt als een cocon — het isoleert moeder en kind van de wereld. Het universele gebaar van bescherming, <span class="desc-highlight">geschilderd zonder sentimentaliteit.</span>
+    </div>
+    <div class="desc-block desc-proposed">
+      <span class="desc-label">Voorstel (NL)</span>
+      Het wit reliëf op de achtergrond werkt als een cocon — het isoleert moeder en kind van de wereld. Beide dragen een bindi; de gesloten ogen van het kind drukken volledig vertrouwen uit.
+    </div>
+    <div class="desc-block desc-current" style="margin-top:12px;">
+      <span class="desc-label">Huidig (EN)</span>
+      The white relief in the background works as a cocoon — isolating mother and child from the world. The universal gesture of protection, <span class="desc-highlight">painted without sentimentality.</span>
+    </div>
+    <div class="desc-block desc-proposed">
+      <span class="desc-label">Voorstel (EN)</span>
+      The white relief in the background works as a cocoon — isolating mother and child from the world. Both wear a bindi; the child's closed eyes express complete trust.
+    </div>
+    <div class="choice-row">
+      <label><input type="radio" name="choice-04" value="huidig" onchange="updateCounter()"> Huidig behouden ("zonder sentimentaliteit" klopt)</label>
+      <label><input type="radio" name="choice-04" value="voorstel" onchange="updateCounter()"> Voorstel (focus op bindi en vertrouwen)</label>
+      <label><input type="radio" name="choice-04" value="eigen" onchange="updateCounter()"> Eigen tekst:</label>
+    </div>
+    <textarea class="free-text" data-for="04" placeholder="Eigen beschrijving (NL + EN)..."></textarea>
+  </div>
+
+  <!-- #15 Stilte in Saffraan -->
+  <div class="card" data-id="15">
+    <div class="card-header">
+      <img src="paintings-new/IMG_0284.webp" alt="Stilte in Saffraan">
+      <div class="card-header-text">
+        <span class="card-number">#15</span>
+        <div class="card-title">Stilte in Saffraan</div>
+        <span class="card-issue issue-check">Check met Deva</span>
+      </div>
+    </div>
+    <div class="question-box">
+      <strong>Vraag:</strong> Ik schreef "het enige mannelijke portret" — de geschoren hoofd en monniksgewaad suggereren dat, maar is het bewust mannelijk? Of genderneutraal?
+    </div>
+    <div class="desc-block desc-current">
+      <span class="desc-label">Huidig (NL)</span>
+      <span class="desc-highlight">Het enige mannelijke portret in de collectie</span> — en misschien het stilste. Het reliëf van het saffraan gewaad contrasteert met de gladde kalmte van het gezicht. Een schilderij als meditatie.
+    </div>
+    <div class="desc-block desc-proposed">
+      <span class="desc-label">Voorstel (NL) — als het mannelijk is</span>
+      Het enige mannelijke portret in de collectie. Het reliëf van het saffraan gewaad contrasteert met de gladde kalmte van het gezicht. De groene achtergrond roept tropisch blad op — stilte en warmte tegelijk.
+    </div>
+    <div class="choice-row">
+      <label><input type="radio" name="choice-15" value="huidig" onchange="updateCounter()"> Huidig behouden</label>
+      <label><input type="radio" name="choice-15" value="voorstel" onchange="updateCounter()"> Voorstel overnemen</label>
+      <label><input type="radio" name="choice-15" value="eigen" onchange="updateCounter()"> Eigen tekst:</label>
+    </div>
+    <textarea class="free-text" data-for="15" placeholder="Is het mannelijk / genderneutraal? Eigen beschrijving..."></textarea>
+  </div>
+
+  <!-- #17 Droomster met Vlinder -->
+  <div class="card" data-id="17">
+    <div class="card-header">
+      <img src="paintings-new/IMG_0299.webp" alt="Droomster met Vlinder">
+      <div class="card-header-text">
+        <span class="card-number">#17</span>
+        <div class="card-title">Droomster met Vlinder</div>
+        <span class="card-issue issue-check">Check met Deva</span>
+      </div>
+    </div>
+    <div class="question-box">
+      <strong>Vraag:</strong> Ik schreef "ingelijst met bladgoud" — maar op de foto zie ik een fysiek gouden kader. Is het bladgoud op het doek zelf, of is het het kader?
+    </div>
+    <div class="desc-block desc-current">
+      <span class="desc-label">Huidig (NL)</span>
+      Echte kwasten hangen aan het doek en bewegen mee met de lucht in de kamer. <span class="desc-highlight">Ingelijst met bladgoud</span>, speels en dromerig — dit werk weigert stil te zijn en beweegt met je mee.
+    </div>
+    <div class="desc-block desc-proposed">
+      <span class="desc-label">Voorstel (NL) — als het het kader is, niet bladgoud</span>
+      Echte kwasten hangen aan het doek en bewegen mee met de lucht in de kamer. Speels en dromerig — de vlinder, de gestippelde jurk en de paarse tinten geven het werk een sprookjesachtige sfeer.
+    </div>
+    <div class="choice-row">
+      <label><input type="radio" name="choice-17" value="huidig" onchange="updateCounter()"> Huidig behouden (het IS bladgoud op het doek)</label>
+      <label><input type="radio" name="choice-17" value="voorstel" onchange="updateCounter()"> Voorstel (zonder bladgoud-claim)</label>
+      <label><input type="radio" name="choice-17" value="eigen" onchange="updateCounter()"> Eigen tekst:</label>
+    </div>
+    <textarea class="free-text" data-for="17" placeholder="Bladgoud of kader? Eigen beschrijving..."></textarea>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- SECTION: BEELDKWALITEIT -->
+  <!-- ============================================ -->
+  <div class="section-divider">
+    <h2>&#128247; Beeldkwaliteit</h2>
+    <p>Foto's die bijgesneden, opnieuw gefotografeerd, of kleur-gecorrigeerd moeten worden</p>
+  </div>
+
+  <div class="img-issue-grid">
+    <div class="img-issue-card">
+      <img src="paintings-new/IMG_0299.webp" alt="Droomster met Vlinder">
+      <div class="img-info">
+        <div class="img-title">#17 Droomster met Vlinder</div>
+        <div class="img-problem">Gouden kader domineert de foto. Schilderij is klein in beeld. Bijsnijden of opnieuw fotograferen.</div>
+      </div>
+    </div>
+    <div class="img-issue-card">
+      <img src="paintings-new/IMG_0288.webp" alt="Lente van het Hart">
+      <div class="img-info">
+        <div class="img-title">#19 Lente van het Hart</div>
+        <div class="img-problem">Breed donkerrood kader zichtbaar. Bijsnijden zodat alleen het schilderij overblijft.</div>
+      </div>
+    </div>
+    <div class="img-issue-card">
+      <img src="paintings-new/IMG_0290.webp" alt="Vogel & Bloem">
+      <div class="img-info">
+        <div class="img-title">#20 Vogel & Bloem</div>
+        <div class="img-problem">Breed donkerrood kader zichtbaar. Bijsnijden.</div>
+      </div>
+    </div>
+    <div class="img-issue-card">
+      <img src="paintings-new/IMG_0291.webp" alt="Meisje met Vogel">
+      <div class="img-info">
+        <div class="img-title">#21 Meisje met Vogel</div>
+        <div class="img-problem">Donkerrood kader + gespikkeld patroon zichtbaar. Bijsnijden.</div>
+      </div>
+    </div>
+    <div class="img-issue-card">
+      <img src="paintings-new/IMG_0297.webp" alt="Kracht">
+      <div class="img-info">
+        <div class="img-title">#13 Kracht</div>
+        <div class="img-problem">Zeer verbleekt / uitgewassen kleuren. Slechte belichting of bewust? Opnieuw fotograferen of kleurcorrectie.</div>
+      </div>
+    </div>
+    <div class="img-issue-card">
+      <img src="paintings-new/IMG_0255.webp" alt="Madonna van het Licht">
+      <div class="img-info">
+        <div class="img-title">#02 Madonna van het Licht</div>
+        <div class="img-problem">Gezicht te bleek. Heeft al CSS warm-fix, maar echte beeldbewerking nodig.</div>
+      </div>
+    </div>
+    <div class="img-issue-card">
+      <img src="paintings-new/IMG_0252.webp" alt="Achter de Sluier">
+      <div class="img-info">
+        <div class="img-title">#07 Achter de Sluier</div>
+        <div class="img-problem">Gezicht erg wit/bleek tegen de kleurrijke sluier. Kleurcorrectie nodig.</div>
+      </div>
+    </div>
+    <div class="img-issue-card">
+      <img src="paintings-new/IMG_0253.webp" alt="Gesluierde in Oranje">
+      <div class="img-info">
+        <div class="img-title">#06 Gesluierde in Oranje</div>
+        <div class="img-problem">Gezicht erg wit — sterk contrast met de oranje stof. Kleurcorrectie.</div>
+      </div>
+    </div>
+    <div class="img-issue-card">
+      <img src="paintings-new/IMG_0262.webp" alt="Dagdroom">
+      <div class="img-info">
+        <div class="img-title">#14 Dagdroom</div>
+        <div class="img-problem">Roze/mauve kleurzweem over het hele beeld. Witbalans lijkt af.</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function updateCounter() {
+      const allRadios = document.querySelectorAll('input[type="radio"]');
+      const names = [...new Set([...allRadios].map(r => r.name))];
+      const chosen = names.filter(name =>
+        document.querySelector(`input[name="${name}"]:checked`)
+      ).length;
+      document.getElementById('counter').textContent = chosen;
+      document.getElementById('total').textContent = names.length;
+    }
+
+    function copyChoices() {
+      const allRadios = document.querySelectorAll('input[type="radio"]');
+      const names = [...new Set([...allRadios].map(r => r.name))];
+      let text = 'Beschrijving Review — Keuzes\n=========================\n\n';
+
+      names.forEach(name => {
+        const id = name.replace('choice-', '');
+        const card = document.querySelector(`.card[data-id="${id}"]`);
+        const title = card?.querySelector('.card-title')?.textContent || id;
+        const checked = document.querySelector(`input[name="${name}"]:checked`);
+        const freeText = card?.querySelector('.free-text')?.value?.trim();
+
+        if (checked) {
+          const val = checked.value;
+          if (val === 'eigen' && freeText) {
+            text += `#${id} ${title}: EIGEN TEKST\n${freeText}\n\n`;
+          } else if (val === 'eigen') {
+            text += `#${id} ${title}: Eigen tekst (nog niet ingevuld)\n\n`;
+          } else {
+            text += `#${id} ${title}: ${val.toUpperCase()}\n\n`;
+          }
+        } else {
+          text += `#${id} ${title}: (geen keuze)\n\n`;
+        }
+      });
+
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.querySelector('.copy-btn');
+        btn.textContent = 'Gekopieerd! ✓';
+        setTimeout(() => btn.textContent = 'Kopieer alle keuzes naar klembord', 2000);
+      });
+    }
+
+    // Init counter
+    updateCounter();
+  </script>
+
+</body>
+</html>

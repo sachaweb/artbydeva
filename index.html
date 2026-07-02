@@ -1,328 +1,149 @@
 <!DOCTYPE html>
-<html>
+<html lang="nl">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Deva Saal — Schilderkunst</title>
+  <meta name="description" content="Deva Saal schildert het goddelijk vrouwelijke — godinnen, gesluierde gezichten en moeders in acryl, bladgoud en gemengde techniek.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Hanken+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<x-dc>
-<helmet>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Hanken+Grotesk:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<style>
-  *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{margin:0;background:#14121C;color:#F1EADB;font-family:'Hanken Grotesk',sans-serif;-webkit-font-smoothing:antialiased}
-  ::selection{background:#D8A93C;color:#14121C}
-  a{color:inherit}
-  @keyframes floatIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-  @keyframes lbIn{from{opacity:0}to{opacity:1}}
-  img{display:block}
-</style>
-</helmet>
 
-<div style="min-height:100vh;background:radial-gradient(120% 80% at 70% -10%, #211B33 0%, #14121C 55%)">
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <a href="#top" class="nav__logo">
+      <span class="nav__name">Deva Saal</span>
+      <span class="nav__tag">Schilderkunst</span>
+    </a>
+    <div class="nav__links">
+      <a href="#galerie" data-i18n="nav.gallery">Galerie</a>
+      <a href="#over" data-i18n="nav.about">Over Deva</a>
+      <a href="#contact" class="nav__cta">Contact</a>
+      <button class="lang-toggle" id="lang-toggle" aria-label="Switch language">EN</button>
+    </div>
+  </nav>
 
-  <header style="position:sticky;top:0;z-index:50;background:rgba(20,18,28,0.78);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,0.08)">
-    <nav style="max-width:1280px;margin:0 auto;padding:18px 32px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap">
-      <a href="#top" style="text-decoration:none;display:flex;align-items:baseline;gap:12px">
-        <span style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;letter-spacing:0.02em;line-height:1;color:#F4EEDF">Deva Saal</span>
-        <span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.24em;text-transform:uppercase;color:#D8A93C">Schilderkunst</span>
-      </a>
-      <div style="display:flex;align-items:center;gap:26px;flex-wrap:wrap;font-size:14px;letter-spacing:0.02em">
-        <a href="#work" style="text-decoration:none;color:#CFC6BA" style-hover="color:#E6C25E">Werk</a>
-        <sc-if value="{{ showAbout }}" hint-placeholder-val="{{ true }}"><a href="#about" style="text-decoration:none;color:#CFC6BA" style-hover="color:#E6C25E">Over Deva</a></sc-if>
-        <sc-if value="{{ showShop }}" hint-placeholder-val="{{ true }}"><a href="#shop" style="text-decoration:none;color:#CFC6BA" style-hover="color:#E6C25E">Te koop</a></sc-if>
-        <a href="#contact" style="display:inline-flex;align-items:center;padding:9px 18px;border:1px solid #D8A93C;border-radius:999px;text-decoration:none;font-size:13px;letter-spacing:0.03em;color:#E6C25E;transition:all .2s" style-hover="background:#D8A93C;color:#14121C">Informeer</a>
+  <!-- HERO (parallax) -->
+  <section class="hero" id="top">
+    <div class="hero__image-wrap">
+      <img src="paintings-new/IMG_0255.webp" alt="Madonna — schilderij van Deva Saal" class="hero__image">
+    </div>
+    <div class="hero__overlay"></div>
+    <div class="hero__content">
+      <p class="hero__subtitle" data-i18n="hero.subtitle">Het heilige vrouwelijke · magisch realisme</p>
+      <h1 class="hero__title">Deva Saal</h1>
+      <p class="hero__description" data-i18n="hero.description">Schilderijen in acryl, bladgoud en gemengde techniek — godinnen, gesluierde gezichten en het goddelijk vrouwelijke over alle culturen heen.</p>
+      <a href="#galerie" class="hero__cta" data-i18n="hero.cta">Bekijk de galerie ↓</a>
+    </div>
+    <div class="hero__scroll-hint">
+      <span>Scroll</span>
+      <div class="hero__scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="gallery" id="galerie">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label" data-i18n="gallery.label">Collectie</span>
+        <h2 class="section-title" data-i18n="gallery.title">De Galerie</h2>
+        <p style="font-size:15px;line-height:1.65;color:#9D93A6;max-width:52ch;margin-top:8px;" data-i18n="gallery.intro">Acryl, bladgoud en gemengde techniek op doek. Klik een werk voor details en een schermvullende weergave.</p>
       </div>
-    </nav>
-  </header>
-
-  <main id="top">
-
-    <!-- HERO -->
-    <section style="max-width:1280px;margin:0 auto;padding:clamp(44px,7vw,104px) 32px clamp(48px,6vw,84px)">
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(36px,5vw,80px);align-items:center">
-        <div style="animation:floatIn .8s ease both">
-          <div style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.24em;text-transform:uppercase;color:#D8A93C;margin-bottom:28px">Het heilige vrouwelijke · magisch realisme</div>
-          <h1 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(46px,6.8vw,94px);line-height:1.0;letter-spacing:-0.005em;margin:0 0 26px;text-wrap:balance;color:#F6F0E2">Gezichten die <em style="font-style:italic;color:#E6C25E">licht</em> dragen.</h1>
-          <p style="max-width:48ch;font-size:18px;line-height:1.68;color:#BCB2C0;margin:0 0 38px">Deva Saal schildert het goddelijk vrouwelijke — godinnen, gesluierde gezichten, moeders en wijze vrouwen uit tradities van over de hele wereld. In verzadigde kleur, bladgoud en getextureerd reliëf, soms verweven met echte stof en pailletten, waar het alledaagse en het heilige samenvallen.</p>
-          <div style="display:flex;gap:16px;flex-wrap:wrap">
-            <a href="#work" style="display:inline-flex;align-items:center;padding:14px 28px;background:#D8A93C;color:#14121C;text-decoration:none;border-radius:999px;font-size:15px;font-weight:500;letter-spacing:0.02em;transition:all .2s" style-hover="background:#E6C25E">Bekijk de galerie</a>
-            <a href="#about" style="display:inline-flex;align-items:center;padding:14px 28px;border:1px solid rgba(255,255,255,0.22);color:#F1EADB;text-decoration:none;border-radius:999px;font-size:15px;letter-spacing:0.02em;transition:all .2s" style-hover="border-color:#E6C25E;color:#E6C25E">Over de kunstenaar</a>
-          </div>
-        </div>
-        <div style="animation:floatIn 1s ease .15s both">
-          <div style="position:relative;padding:14px;background:linear-gradient(160deg,#26203A,#1A1626);border:1px solid rgba(216,169,60,0.35);border-radius:4px;box-shadow:0 40px 90px -40px rgba(0,0,0,0.8),0 0 70px -30px rgba(216,169,60,0.4);cursor:zoom-in" onClick="{{ openHero }}">
-            <img src="paintings-new/IMG_0279.webp" alt="Drie Godinnen — schilderij van Deva Saal" style="width:100%;height:auto;border-radius:2px"/>
-            <div style="position:absolute;bottom:-15px;left:14px;background:#14121C;border:1px solid rgba(216,169,60,0.4);padding:9px 16px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.06em;color:#E6C25E">Drie Godinnen · gemengde techniek</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- GALLERY -->
-    <section id="work" style="border-top:1px solid rgba(255,255,255,0.07);padding:clamp(60px,7vw,112px) 0 clamp(40px,5vw,72px)">
-      <div style="max-width:1280px;margin:0 auto;padding:0 32px">
-        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:clamp(44px,5vw,72px)">
-          <div>
-            <div style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.24em;text-transform:uppercase;color:#D8A93C;margin-bottom:18px">Recent werk</div>
-            <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(36px,5vw,64px);line-height:1;margin:0;color:#F6F0E2">De Galerie</h2>
-          </div>
-          <p style="max-width:42ch;font-size:15px;line-height:1.65;color:#9D93A6;margin:0">Acryl, bladgoud en gemengde techniek op doek, geordend naar thema. Klik een werk voor een schermvullende weergave. Originelen zijn beschikbaar — informeer voor prijzen.</p>
-        </div>
-
-        <sc-for list="{{ groups }}" as="g" hint-placeholder-count="3">
-          <div style="margin-bottom:clamp(48px,6vw,84px)">
-            <div style="border-top:1px solid rgba(216,169,60,0.3);padding-top:20px;margin-bottom:30px;max-width:760px">
-              <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#D8A93C;margin-bottom:12px">{{ g.label }}</div>
-              <h3 style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;font-size:clamp(26px,3.4vw,40px);line-height:1.05;margin:0 0 12px;color:#F1EADB">{{ g.title }}</h3>
-              <p style="font-size:14.5px;line-height:1.6;color:#9D93A6;margin:0">{{ g.intro }}</p>
-            </div>
-            <div style="columns:300px;column-gap:clamp(20px,2.4vw,32px)">
-              <sc-for list="{{ g.items }}" as="w" hint-placeholder-count="4">
-                <figure style="break-inside:avoid;margin:0 0 clamp(20px,2.4vw,32px);display:inline-block;width:100%">
-                  <div style="overflow:hidden;border:1px solid rgba(255,255,255,0.08);border-radius:3px;background:#1C1926;box-shadow:0 20px 50px -30px rgba(0,0,0,0.9);cursor:zoom-in" onClick="{{ w.open }}">
-                    <img src="{{ w.src }}" alt="{{ w.title }} — schilderij van Deva Saal" loading="lazy" style="width:100%;height:auto;transition:transform .6s ease,filter .6s ease" style-hover="transform:scale(1.03);filter:brightness(1.07)"/>
-                  </div>
-                  <figcaption style="display:flex;gap:13px;align-items:baseline;padding:15px 2px 0">
-                    <span style="font-family:'Space Mono',monospace;font-size:11px;color:#D8A93C;letter-spacing:0.05em;padding-top:3px">{{ w.n }}</span>
-                    <div style="display:flex;flex-direction:column;gap:5px">
-                      <span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:22px;line-height:1.1;color:#F1EADB">{{ w.title }}</span>
-                      <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.04em;color:#857C8F;text-transform:uppercase">{{ w.meta }}</span>
-                    </div>
-                  </figcaption>
-                </figure>
-              </sc-for>
-            </div>
-          </div>
-        </sc-for>
-      </div>
-    </section>
-
-    <!-- ABOUT -->
-    <sc-if value="{{ showAbout }}" hint-placeholder-val="{{ true }}">
-    <section id="about" style="border-top:1px solid rgba(255,255,255,0.07);background:#1A1626;padding:clamp(68px,9vw,132px) 0">
-      <div style="max-width:1280px;margin:0 auto;padding:0 32px">
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(44px,6vw,92px);align-items:center">
-        <div style="position:relative;max-width:460px">
-          <div style="padding:12px;background:linear-gradient(160deg,#26203A,#181423);border:1px solid rgba(216,169,60,0.3);border-radius:4px;box-shadow:0 40px 90px -45px rgba(0,0,0,0.85);cursor:zoom-in" onClick="{{ openAbout }}">
-            <img src="paintings-new/IMG_0265.webp" alt="Gesluierde in goud — schilderij van Deva Saal" style="width:100%;height:auto;border-radius:2px"/>
-          </div>
-        </div>
-        <div>
-          <div style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.24em;text-transform:uppercase;color:#D8A93C;margin-bottom:24px">Over de kunstenaar</div>
-          <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(32px,4.5vw,58px);line-height:1.02;margin:0 0 30px;color:#F6F0E2">Kleur als<br>devotie</h2>
-          <div style="max-width:54ch;font-size:17px;line-height:1.72;color:#C3BAC9;display:flex;flex-direction:column;gap:20px">
-            <p style="margin:0">Deva Saal is een Europese schilder die het heilige vrouwelijke viert over culturen heen — van hindoeïstische godinnen tot boeddhistische sereniteit, van Europese volkse madonna's tot Afrikaanse en oosterse kracht. Haar werk straalt warmte, tederheid en innerlijke kracht uit.</p>
-            <p style="margin:0">Ze werkt in acryl op doek, vaak met gemengde techniek: opgebrachte reliëfs, bladgoud en soms echte stof en pailletten die de doeken een tastbare, driedimensionale kwaliteit geven en het licht vangen. Haar werk werd onder meer getoond tijdens een solo-expositie in het Kasteel van Schoten (België) in 2009.</p>
-          </div>
-          <div style="margin-top:38px;display:flex;gap:40px;flex-wrap:wrap;font-family:'Space Mono',monospace">
-            <div><div style="font-size:13px;color:#F1EADB;letter-spacing:0.04em">Acryl, bladgoud &amp; gemengde techniek</div><div style="font-size:11px;color:#857C8F;letter-spacing:0.06em;margin-top:5px;text-transform:uppercase">Medium</div></div>
-            <div><div style="font-size:13px;color:#F1EADB;letter-spacing:0.04em">Kasteel van Schoten, 2009</div><div style="font-size:11px;color:#857C8F;letter-spacing:0.06em;margin-top:5px;text-transform:uppercase">Solo-expositie</div></div>
-            <div><div style="font-size:13px;color:#F1EADB;letter-spacing:0.04em">Opdrachten welkom</div><div style="font-size:11px;color:#857C8F;letter-spacing:0.06em;margin-top:5px;text-transform:uppercase">Status</div></div>
-          </div>
-        </div>
-      </div>
-      </div>
-    </section>
-    </sc-if>
-
-    <!-- SHOP -->
-    <sc-if value="{{ showShop }}" hint-placeholder-val="{{ true }}">
-    <section id="shop" style="border-top:1px solid rgba(255,255,255,0.07);padding:clamp(60px,7vw,112px) 0">
-      <div style="max-width:1280px;margin:0 auto;padding:0 32px">
-        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:clamp(40px,5vw,68px)">
-          <div>
-            <div style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.24em;text-transform:uppercase;color:#D8A93C;margin-bottom:18px">Te koop</div>
-            <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(36px,5vw,64px);line-height:1;margin:0;color:#F6F0E2">Neem een werk mee</h2>
-          </div>
-          <p style="max-width:40ch;font-size:15px;line-height:1.65;color:#9D93A6;margin:0">Originele schilderijen, elk uniek. Prijs en beschikbaarheid op aanvraag — elke aanvraag wordt persoonlijk beantwoord.</p>
-        </div>
-
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(24px,3vw,40px)">
-          <sc-for list="{{ shopItems }}" as="s" hint-placeholder-count="3">
-            <article style="background:#1C1926;border:1px solid rgba(255,255,255,0.08);border-radius:3px;display:flex;flex-direction:column;overflow:hidden">
-              <div style="background:#14121C;display:flex;align-items:center;justify-content:center;cursor:zoom-in" onClick="{{ s.open }}">
-                <img src="{{ s.src }}" alt="{{ s.title }} — schilderij van Deva Saal" loading="lazy" style="width:100%;height:300px;object-fit:cover"/>
-              </div>
-              <div style="padding:22px 22px 24px;display:flex;flex-direction:column;gap:14px;flex:1">
-                <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
-                  <span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#857C8F">{{ s.kind }}</span>
-                  <span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;padding:4px 10px;border-radius:999px;background:{{ s.statusBg }};color:{{ s.statusFg }}">{{ s.status }}</span>
-                </div>
-                <h3 style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;font-size:27px;line-height:1.05;margin:0;color:#F1EADB">{{ s.title }}</h3>
-                <span style="font-family:'Space Mono',monospace;font-size:11px;color:#857C8F;letter-spacing:0.04em">{{ s.meta }}</span>
-                <div style="margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:14px">
-                  <span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:20px;color:#E6C25E">Op aanvraag</span>
-                  <a href="#contact" style="display:inline-flex;align-items:center;padding:10px 18px;background:#D8A93C;color:#14121C;text-decoration:none;border-radius:999px;font-size:13px;font-weight:500;letter-spacing:0.02em;transition:background .2s" style-hover="background:#E6C25E">Informeer</a>
-                </div>
-              </div>
-            </article>
-          </sc-for>
-        </div>
-      </div>
-    </section>
-    </sc-if>
-
-    <!-- ARCHIVE / EARLY WORK -->
-    <sc-if value="{{ showArchive }}" hint-placeholder-val="{{ true }}">
-    <section id="archive" style="border-top:1px solid rgba(255,255,255,0.07);background:#100E17;padding:clamp(48px,6vw,86px) 0">
-      <div style="max-width:1280px;margin:0 auto;padding:0 32px">
-        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:28px;flex-wrap:wrap">
-          <div style="max-width:620px">
-            <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#7C7388;margin-bottom:16px">Archief</div>
-            <h2 style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;font-size:clamp(26px,3.4vw,40px);line-height:1.05;margin:0 0 14px;color:#C3BAC9">Vroeger werk, 2000–2014</h2>
-            <p style="font-size:15px;line-height:1.65;color:#857C8F;margin:0">Aan het huidige werk gaat een eerste oeuvre vooraf — godinnen, boeddha's en engelen uit de jaren 2000–2014. Een selectie daarvan is op aanvraag te bezichtigen.</p>
-          </div>
-          <a href="#contact" style="display:inline-flex;align-items:center;gap:10px;padding:12px 22px;border:1px solid rgba(255,255,255,0.18);color:#CFC6BA;text-decoration:none;border-radius:999px;font-size:14px;letter-spacing:0.02em;transition:all .2s;white-space:nowrap" style-hover="border-color:#E6C25E;color:#E6C25E">Vraag het archief op →</a>
-        </div>
-      </div>
-    </section>
-    </sc-if>
-
-    <!-- CONTACT / FOOTER -->
-    <footer id="contact" style="border-top:1px solid rgba(255,255,255,0.07);background:#100E17;padding:clamp(68px,9vw,132px) 0 40px">
-      <div style="max-width:1280px;margin:0 auto;padding:0 32px">
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(40px,6vw,80px);align-items:start">
-          <div>
-            <div style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.24em;text-transform:uppercase;color:#D8A93C;margin-bottom:26px">Aanvragen &amp; opdrachten</div>
-            <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(40px,5.6vw,74px);line-height:1.0;margin:0 0 30px;color:#F6F0E2">Breng het <em style="font-style:italic;color:#E6C25E">licht</em><br>in huis.</h2>
-            <p style="max-width:46ch;font-size:17px;line-height:1.62;color:#BCB2C0;margin:0 0 36px">Voor prijzen, beschikbaarheid, een atelierbezoek of een portret in opdracht — schrijf Deva rechtstreeks. Ze beantwoordt elk bericht persoonlijk.</p>
-            <a href="mailto:hello@deva.art?subject=Aanvraag%20via%20de%20website" style="display:inline-flex;align-items:center;gap:12px;padding:16px 32px;background:#D8A93C;color:#14121C;text-decoration:none;border-radius:999px;font-size:16px;font-weight:500;letter-spacing:0.02em;transition:all .2s" style-hover="background:#E6C25E">Schrijf naar het atelier →</a>
-          </div>
-          <div style="display:flex;flex-direction:column;gap:28px;font-size:15px">
-            <div>
-              <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#7C7388;margin-bottom:10px">E-mail</div>
-              <a href="mailto:hello@deva.art" style="text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.18);padding-bottom:2px;color:#E8E0D2" style-hover="border-color:#E6C25E">hello@deva.art</a>
-            </div>
-            <div>
-              <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#7C7388;margin-bottom:10px">Instagram</div>
-              <a href="https://instagram.com" target="_blank" rel="noopener" style="text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.18);padding-bottom:2px;color:#E8E0D2" style-hover="border-color:#E6C25E">@deva.schilderkunst</a>
-            </div>
-            <div>
-              <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#7C7388;margin-bottom:10px">Atelier</div>
-              <span style="color:#BCB2C0">Bezoek op afspraak</span>
-            </div>
-          </div>
-        </div>
-        <div style="margin-top:clamp(48px,7vw,90px);padding-top:28px;border-top:1px solid rgba(255,255,255,0.08);display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.08em;color:#7C7388;text-transform:uppercase">
-          <span>Deva Saal — Schilderkunst</span>
-          <span>© {{ year }} Deva Saal · Alle werken © de kunstenaar</span>
-        </div>
-      </div>
-    </footer>
-
-  </main>
-
-  <!-- LIGHTBOX -->
-  <sc-if value="{{ lb }}" hint-placeholder-val="{{ false }}">
-    <div onClick="{{ closeLb }}" style="position:fixed;inset:0;z-index:100;background:rgba(8,7,12,0.94);backdrop-filter:blur(8px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:clamp(20px,4vw,56px);animation:lbIn .25s ease both;cursor:zoom-out">
-      <button onClick="{{ closeLb }}" aria-label="Sluiten" style="position:absolute;top:22px;right:26px;width:46px;height:46px;border-radius:999px;border:1px solid rgba(255,255,255,0.25);background:rgba(20,18,28,0.6);color:#F1EADB;font-size:22px;line-height:1;cursor:pointer;transition:all .2s" style-hover="background:#D8A93C;color:#14121C;border-color:#D8A93C">×</button>
-      <img src="{{ lb.src }}" alt="{{ lb.title }}" onClick="{{ stop }}" style="max-width:min(100%,1100px);max-height:78vh;width:auto;height:auto;border-radius:3px;box-shadow:0 40px 120px -30px rgba(0,0,0,0.9);cursor:default"/>
-      <div style="margin-top:22px;text-align:center" onClick="{{ stop }}">
-        <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:26px;color:#F4EEDF;margin-bottom:6px">{{ lb.title }}</div>
-        <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#9D93A6">{{ lb.meta }}</div>
+      <div class="gallery__grid" id="gallery-grid">
+        <!-- Paintings rendered by script.js -->
       </div>
     </div>
-  </sc-if>
+  </section>
 
-</div>
-</x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900},&quot;showAbout&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;showShop&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;showArchive&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
-class Component extends DCLogic {
-  state = { lb: null };
+  <!-- ABOUT -->
+  <section class="about" id="over">
+    <div class="container">
+      <div class="about__grid">
+        <div class="about__image-wrap reveal">
+          <img src="paintings-new/IMG_0265.webp" alt="Gesluierde in Goud — Deva Saal" class="about__image">
+        </div>
+        <div class="about__text reveal">
+          <span class="section-label" data-i18n="about.label">Over de kunstenaar</span>
+          <h2 class="section-title" data-i18n="about.title">Kleur als devotie</h2>
+          <p data-i18n="about.p1">Deva Saal is een Duits-Nederlandse schilder die het heilige vrouwelijke viert over culturen heen — van hindoeïstische godinnen tot boeddhistische sereniteit, van Europese volkse madonna's tot Afrikaanse en oosterse kracht. Haar werk straalt warmte, tederheid en innerlijke kracht uit.</p>
+          <p data-i18n="about.p2">Ze werkt in acryl op doek, vaak met gemengde techniek: opgebrachte reliëfs, bladgoud en soms echte stof en pailletten die de doeken een tastbare, driedimensionale kwaliteit geven en het licht vangen.</p>
+          <div class="about__facts">
+            <div class="about__fact">
+              <span class="about__fact-value" data-i18n="about.medium">Acryl, bladgoud &amp; gemengde techniek</span>
+              <span class="about__fact-label">Medium</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  componentDidMount() {
-    this._onKey = (e) => { if (e.key === 'Escape') this.setState({ lb: null }); };
-    window.addEventListener('keydown', this._onKey);
-  }
-  componentWillUnmount() {
-    window.removeEventListener('keydown', this._onKey);
-  }
+  <!-- CONTACT / FOOTER -->
+  <footer class="contact" id="contact">
+    <div class="container">
+      <div class="contact__grid">
+        <div class="reveal">
+          <span class="section-label" data-i18n="contact.label">Aanvragen &amp; opdrachten</span>
+          <h2 class="section-title" data-i18n="contact.title" data-i18n-html="true">Breng het <em>licht</em> in huis.</h2>
+          <p class="contact__intro" data-i18n="contact.intro">Voor prijzen, beschikbaarheid, een atelierbezoek of een portret in opdracht — schrijf Deva rechtstreeks. Ze beantwoordt elk bericht persoonlijk.</p>
+          <a href="mailto:hello@deva.art?subject=Aanvraag%20via%20de%20website" class="btn btn--primary" data-i18n="contact.cta">Schrijf naar het atelier →</a>
+        </div>
+        <div class="contact__info reveal">
+          <div>
+            <span class="contact__label">E-mail</span>
+            <a href="mailto:hello@deva.art">hello@deva.art</a>
+          </div>
+          <div>
+            <span class="contact__label">Instagram</span>
+            <a href="https://instagram.com" target="_blank" rel="noopener">@deva.schilderkunst</a>
+          </div>
+          <div>
+            <span class="contact__label">Atelier</span>
+            <span style="color:#BCB2C0">Bezoek op afspraak</span>
+          </div>
+        </div>
+      </div>
+      <div class="contact__footer">
+        <span>Deva Saal — Schilderkunst</span>
+        <span>© 2026 Deva Saal · Alle werken © de kunstenaar</span>
+      </div>
+    </div>
+  </footer>
 
-  renderVals() {
-    const open = (item) => () => this.setState({ lb: item });
-    const P = 'paintings-new/';
-    const W = (n, file, title, meta) => {
-      const item = { n, src: P + file, title, meta };
-      item.open = open(item);
-      return item;
-    };
+  <!-- MODAL (painting detail overlay) -->
+  <div class="modal" id="modal" aria-hidden="true">
+    <button class="modal__close" aria-label="Sluiten">×</button>
+    <button class="modal__nav modal__nav--prev" aria-label="Vorig werk">‹</button>
+    <button class="modal__nav modal__nav--next" aria-label="Volgend werk">›</button>
+    <div class="modal__content">
+      <div class="modal__image-wrap">
+        <img src="" alt="" class="modal__image" id="modal-image">
+      </div>
+      <div class="modal__info" id="modal-info">
+        <h3 class="modal__title" id="modal-title"></h3>
+        <p class="modal__description" id="modal-description"></p>
+        <div class="modal__meta">
+          <div>
+            <span class="modal__meta-label">Techniek</span>
+            <span class="modal__meta-value" id="modal-medium"></span>
+          </div>
+          <div>
+            <span class="modal__meta-label">Afmetingen</span>
+            <span class="modal__meta-value" id="modal-dimensions"></span>
+          </div>
+          <div>
+            <span class="modal__meta-label">Jaar</span>
+            <span class="modal__meta-value" id="modal-year"></span>
+          </div>
+        </div>
+        <a href="#contact" class="btn btn--outline modal__inquire" id="modal-inquire">Informeer over dit werk</a>
+      </div>
+    </div>
+  </div>
 
-    const groups = [
-      {
-        label: 'I · Het heilige vrouwelijke',
-        title: 'Godinnen, iconen & moeders',
-        intro: 'Devotionele figuren in bladgoud en reliëf — halo\u2019s, godinnen en de band tussen moeder en kind.',
-        items: [
-          W('01', 'IMG_0279.webp', 'Drie Godinnen', 'Acryl, bladgoud & gemengde techniek'),
-          W('02', 'IMG_0255.webp', 'Madonna met Vogels', 'Acryl, bladgoud & reliëf'),
-          W('03', 'IMG_0265.webp', 'Gesluierde in Goud', 'Acryl, bladgoud & reliëf'),
-          W('04', 'IMG_0277.webp', 'Moeder & Kind', 'Acryl & reliëf op doek'),
-          W('05', 'IMG_0286.webp', 'Vrouw met Anthurium', 'Acryl & reliëf op doek'),
-        ],
-      },
-      {
-        label: 'II · Het gelaat',
-        title: 'Portretten & de blik',
-        intro: 'Frontale, intense gezichten in gemengde techniek — stof, pailletten en zwaar opgebracht reliëf.',
-        items: [
-          W('06', 'IMG_0253.webp', 'Gesluierde in Oranje', 'Acryl & textiel · gemengde techniek'),
-          W('07', 'IMG_0252.webp', 'Rode Sluier', 'Acryl, textiel & pailletten'),
-          W('08', 'IMG_0261.webp', 'Oranje Hoofddoek I', 'Acryl & reliëf op doek'),
-          W('09', 'IMG_0263.webp', 'Oranje Hoofddoek II', 'Acryl & reliëf op doek'),
-          W('10', 'IMG_0275.webp', 'Groene Sluier', 'Acryl & reliëf op doek'),
-          W('11', 'IMG_0269.webp', 'Drie Gezichten', 'Acryl & reliëf op doek'),
-          W('12', 'IMG_0249.webp', 'Twee', 'Acryl op doek'),
-          W('13', 'IMG_0297.webp', 'Profiel in Oker', 'Acryl op doek'),
-          W('14', 'IMG_0262.webp', 'Rust', 'Acryl op doek · 2006'),
-        ],
-      },
-      {
-        label: 'III · Verhalen & natuur',
-        title: 'Vogels, bloesem & droom',
-        intro: 'Verhalende taferelen vol vogels, bloemen en figuren — lichter van toon, vol leven.',
-        items: [
-          W('15', 'IMG_0284.webp', 'De Monnik', 'Acryl & reliëf op doek'),
-          W('16', 'IMG_0282.webp', 'Bloesemmeisje', 'Acryl & reliëf op doek'),
-          W('17', 'IMG_0299.webp', 'Vlinder', 'Acryl, textiel & kwasten · gemengde techniek'),
-          W('18', 'IMG_0272.webp', 'Levensboom', 'Acryl op doek'),
-          W('19', 'IMG_0288.webp', 'Geliefden', 'Acryl op doek · 2008'),
-          W('20', 'IMG_0290.webp', 'Vogel & Bloem', 'Acryl op doek · 2008'),
-          W('21', 'IMG_0291.webp', 'Meisje met Vogel', 'Acryl op doek · 2008'),
-        ],
-      },
-    ];
-
-    const shop = (file, kind, title, meta) => {
-      const s = { src: P + file, kind, title, meta, status: 'Beschikbaar', statusBg: 'rgba(126,176,120,0.18)', statusFg: '#9FD18F' };
-      s.open = open({ src: s.src, title, meta });
-      return s;
-    };
-    const shopItems = [
-      shop('IMG_0279.webp', 'Origineel schilderij', 'Drie Godinnen', 'Acryl, bladgoud & gemengde techniek'),
-      shop('IMG_0265.webp', 'Origineel schilderij', 'Gesluierde in Goud', 'Acryl, bladgoud & reliëf'),
-      shop('IMG_0255.webp', 'Origineel schilderij', 'Madonna met Vogels', 'Acryl, bladgoud & reliëf'),
-    ];
-
-    return {
-      groups,
-      shopItems,
-      year: 2026,
-      lb: this.state.lb,
-      closeLb: () => this.setState({ lb: null }),
-      stop: (e) => e.stopPropagation(),
-      openHero: open({ src: P + 'IMG_0279.webp', title: 'Drie Godinnen', meta: 'Acryl, bladgoud & gemengde techniek' }),
-      openAbout: open({ src: P + 'IMG_0265.webp', title: 'Gesluierde in Goud', meta: 'Acryl, bladgoud & reliëf' }),
-      showAbout: this.props.showAbout ?? true,
-      showShop: this.props.showShop ?? true,
-      showArchive: this.props.showArchive ?? true,
-    };
-  }
-}
-</script>
+  <script src="script.js"></script>
 </body>
 </html>
