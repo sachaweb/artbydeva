@@ -35,6 +35,14 @@ const i18n = {
     'modal.dimensions': 'Afmetingen',
     'modal.year': 'Jaar',
     'scroll': 'Scroll',
+    'form.name': 'Naam',
+    'form.name.placeholder': 'Uw naam',
+    'form.email': 'E-mail',
+    'form.email.placeholder': 'uw@email.nl',
+    'form.message': 'Bericht',
+    'form.message.placeholder': 'Schrijf iets over wat u zoekt — een schilderij, een opdracht, een bezoek...',
+    'form.send': 'Verstuur →',
+    'form.success': 'Dank voor uw bericht — Deva neemt snel contact op.',
   },
   en: {
     'nav.gallery': 'Gallery',
@@ -63,6 +71,14 @@ const i18n = {
     'modal.dimensions': 'Dimensions',
     'modal.year': 'Year',
     'scroll': 'Scroll',
+    'form.name': 'Name',
+    'form.name.placeholder': 'Your name',
+    'form.email': 'Email',
+    'form.email.placeholder': 'your@email.com',
+    'form.message': 'Message',
+    'form.message.placeholder': 'Tell Deva what you\'re looking for — a painting, a commission, a studio visit...',
+    'form.send': 'Send →',
+    'form.success': 'Thank you for your message — Deva will be in touch soon.',
   }
 };
 
@@ -135,7 +151,7 @@ const paintings = [
       nl: 'Echte stof en gouden munten zijn in het doek verwerkt — dit schilderij vraagt om van dichtbij bekeken te worden. De grens tussen schilderkunst en sculptuur vervaagt. Raak het bijna aan.',
       en: 'Real fabric and golden coins are woven into the canvas — this painting demands to be seen up close. The line between painting and sculpture dissolves. Almost touch it.'
     },
-    year: '', dimensions: '', fix: ''
+    year: '', dimensions: '', fix: 'warm'
   },
   {
     id: 7, file: 'IMG_0252.webp',
@@ -201,7 +217,7 @@ const paintings = [
       nl: 'Alsof gezien door water of door een herinnering die langzaam vervaagt. De kleuren lopen in elkaar over zonder scherpe grenzen — dit is schilderen als dromen.',
       en: 'As if seen through water or through a memory slowly fading. The colours bleed into each other without sharp edges — this is painting as dreaming.'
     },
-    year: '', dimensions: '', fix: ''
+    year: '', dimensions: '', fix: 'contrast'
   },
   {
     id: 14, file: 'IMG_0262.webp',
@@ -212,7 +228,7 @@ const paintings = [
       nl: 'Kwetsbaar en direct — geen sluier, geen sieraad, geen afstand. De expressieve lijnen en het bewust versimpelde gezicht doen denken aan Modigliani, maar de warmte is eigen.',
       en: 'Vulnerable and direct — no veil, no ornament, no distance. The expressive lines and deliberately simplified face are reminiscent of Modigliani, but the warmth is entirely her own.'
     },
-    year: '2006', dimensions: '', fix: ''
+    year: '2006', dimensions: '', fix: 'depink'
   },
 
   // Group III: Verhalen & natuur / Stories & nature
@@ -335,6 +351,11 @@ function setLanguage(lang) {
     renderGallery();
     requestAnimationFrame(initReveal);
   }
+
+  // Update form placeholders
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    el.placeholder = t(el.getAttribute('data-i18n-placeholder'));
+  });
 
   // Update modal if open
   if (currentPaintingId !== null) {
@@ -513,6 +534,30 @@ function initReveal() {
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 }
 
+// --- Contact form (Netlify AJAX) ---
+function initContactForm() {
+  const form = document.getElementById('contact-form');
+  const success = document.getElementById('contact-success');
+  if (!form) return;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = form.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    try {
+      await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(new FormData(form)).toString()
+      });
+      form.hidden = true;
+      success.hidden = false;
+    } catch (err) {
+      btn.disabled = false;
+    }
+  });
+}
+
 // --- Init ---
 document.addEventListener('DOMContentLoaded', () => {
   renderGallery();
@@ -520,6 +565,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initParallax();
   initNav();
   initLangToggle();
+  initContactForm();
   // Apply initial language (always run to sync JS translations with HTML)
   setLanguage(currentLang);
   // Delay reveal init so gallery items are rendered

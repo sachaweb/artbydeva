@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <title>Kleurcorrectie — Voor & Na</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #14121C;
+      color: #F1EADB;
+      font-family: system-ui, sans-serif;
+      padding: 48px 32px;
+      line-height: 1.5;
+    }
+    h1 {
+      font-size: 26px;
+      color: #D8A93C;
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+    .subtitle {
+      color: #7C7388;
+      font-size: 13px;
+      margin-bottom: 56px;
+    }
+    .painting { margin-bottom: 72px; }
+    .painting__header { margin-bottom: 14px; }
+    .painting__title {
+      font-size: 18px;
+      color: #F1EADB;
+      margin-bottom: 4px;
+    }
+    .painting__problem {
+      font-size: 12px;
+      color: #9D93A6;
+      margin-bottom: 4px;
+    }
+    .painting__filter {
+      font-size: 12px;
+      color: #5C5468;
+    }
+    .painting__filter code {
+      background: rgba(255,255,255,0.07);
+      padding: 2px 8px;
+      border-radius: 4px;
+      color: #D8A93C;
+      font-size: 11px;
+    }
+    .compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      max-width: 960px;
+    }
+    .compare__col { display: flex; flex-direction: column; gap: 8px; }
+    .compare__label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #5C5468;
+    }
+    .compare__label--after { color: #D8A93C; }
+    .compare__col img {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+      border: 1px solid rgba(255,255,255,0.07);
+      display: block;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      margin: 56px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Kleurcorrectie — Voor &amp; Na</h1>
+  <p class="subtitle">CSS filters op de originele foto's. Geen Photoshop — pure browser-filters. Klik terug voor aanpassing.</p>
+
+  <!-- #6: Gesluierde in Oranje — bleek gezicht -->
+  <div class="painting">
+    <div class="painting__header">
+      <div class="painting__title">#6 — Gesluierde in Oranje (IMG_0253)</div>
+      <div class="painting__problem">Probleem: gezicht te bleek/wit</div>
+      <div class="painting__filter">Fix: <code>saturate(1.1) brightness(0.96) sepia(0.04)</code></div>
+    </div>
+    <div class="compare">
+      <div class="compare__col">
+        <span class="compare__label">Origineel</span>
+        <img src="paintings-new/IMG_0253.webp" alt="Gesluierde in Oranje — origineel">
+      </div>
+      <div class="compare__col">
+        <span class="compare__label compare__label--after">Met correctie</span>
+        <img src="paintings-new/IMG_0253.webp" alt="Gesluierde in Oranje — gecorrigeerd"
+             style="filter: saturate(1.1) brightness(0.96) sepia(0.04);">
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- #13: Kracht — uitgebleekt -->
+  <div class="painting">
+    <div class="painting__header">
+      <div class="painting__title">#13 — Kracht (IMG_0297)</div>
+      <div class="painting__problem">Probleem: zeer uitgebleekt, kleuren te flauw</div>
+      <div class="painting__filter">Fix: <code>contrast(1.25) saturate(1.4) brightness(1.03)</code></div>
+    </div>
+    <div class="compare">
+      <div class="compare__col">
+        <span class="compare__label">Origineel</span>
+        <img src="paintings-new/IMG_0297.webp" alt="Kracht — origineel">
+      </div>
+      <div class="compare__col">
+        <span class="compare__label compare__label--after">Met correctie</span>
+        <img src="paintings-new/IMG_0297.webp" alt="Kracht — gecorrigeerd"
+             style="filter: contrast(1.25) saturate(1.4) brightness(1.03);">
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- #14: Dagdroom — roze kleurstift -->
+  <div class="painting">
+    <div class="painting__header">
+      <div class="painting__title">#14 — Dagdroom (IMG_0262)</div>
+      <div class="painting__problem">Probleem: roze/mauve kleurstift over het hele beeld</div>
+      <div class="painting__filter">Fix: <code>saturate(0.88) hue-rotate(8deg)</code></div>
+    </div>
+    <div class="compare">
+      <div class="compare__col">
+        <span class="compare__label">Origineel</span>
+        <img src="paintings-new/IMG_0262.webp" alt="Dagdroom — origineel">
+      </div>
+      <div class="compare__col">
+        <span class="compare__label compare__label--after">Met correctie</span>
+        <img src="paintings-new/IMG_0262.webp" alt="Dagdroom — gecorrigeerd"
+             style="filter: saturate(0.88) hue-rotate(8deg);">
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

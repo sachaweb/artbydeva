@@ -89,20 +89,27 @@
           <span class="section-label" data-i18n="contact.label">Aanvragen &amp; opdrachten</span>
           <h2 class="section-title" data-i18n="contact.title" data-i18n-html="true">Breng het <em>licht</em> in huis.</h2>
           <p class="contact__intro" data-i18n="contact.intro">Voor prijzen, beschikbaarheid, een atelierbezoek of een portret in opdracht — schrijf Deva rechtstreeks. Ze beantwoordt elk bericht persoonlijk.</p>
-          <a href="mailto:hello@deva.art?subject=Aanvraag%20via%20de%20website" class="btn btn--primary" data-i18n="contact.cta">Schrijf naar het atelier →</a>
         </div>
-        <div class="contact__info reveal">
-          <div>
-            <span class="contact__label">E-mail</span>
-            <a href="mailto:hello@deva.art">hello@deva.art</a>
-          </div>
-          <div>
-            <span class="contact__label">Instagram</span>
-            <a href="https://instagram.com" target="_blank" rel="noopener">@deva.schilderkunst</a>
-          </div>
-          <div>
-            <span class="contact__label">Atelier</span>
-            <span style="color:#BCB2C0">Bezoek op afspraak</span>
+        <div class="reveal">
+          <form name="contact" method="POST" netlify netlify-honeypot="bot-field" class="contact__form" id="contact-form">
+            <input type="hidden" name="form-name" value="contact">
+            <p class="hidden"><label>Niet invullen: <input name="bot-field"></label></p>
+            <div class="form__group">
+              <label class="contact__label" for="name" data-i18n="form.name">Naam</label>
+              <input type="text" id="name" name="name" required class="form__input" placeholder="Uw naam" data-i18n-placeholder="form.name.placeholder">
+            </div>
+            <div class="form__group">
+              <label class="contact__label" for="email" data-i18n="form.email">E-mail</label>
+              <input type="email" id="email" name="email" required class="form__input" placeholder="uw@email.nl" data-i18n-placeholder="form.email.placeholder">
+            </div>
+            <div class="form__group">
+              <label class="contact__label" for="message" data-i18n="form.message">Bericht</label>
+              <textarea id="message" name="message" required class="form__input form__textarea" rows="5" placeholder="Schrijf iets over wat u zoekt..." data-i18n-placeholder="form.message.placeholder"></textarea>
+            </div>
+            <button type="submit" class="btn btn--primary" data-i18n="form.send">Verstuur →</button>
+          </form>
+          <div class="contact__success" id="contact-success" hidden>
+            <p data-i18n="form.success">Dank voor uw bericht — Deva neemt snel contact op.</p>
           </div>
         </div>
       </div>
